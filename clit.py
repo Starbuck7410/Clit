@@ -132,12 +132,15 @@ def exe(cmd):
 #        url = timeline[tweet].entities["urls"][urlindex]
 #        browser = webdriver.Chrome(executable_path = (os.getcwd() + "\chromedriver\chromedriver.exe"))
 #        browser.get(url)
-#    if (cmd == "media"):
-#        tweet = int(input())
-#        mediaindex = int(input())
-#        url = timeline[tweet].entities["media"][mediaindex]["media_url"]
-#        browser = webdriver.Chrome(executable_path = (os.getcwd() + "\chromedriver\chromedriver.exe"))
-#        browser.get(url)
+    if (cmd == "media"):
+        tweet = int(input("ID:\>"))
+#        mediaindex = int(input("MEDIA_ID:\>"))
+        if ('media' in timeline[tweet].entities):
+            for image in timeline[tweet].entities['media']:
+                url = image['media_url']
+        browser = webdriver.Chrome(executable_path = (os.getcwd() + "\chromedriver\chromedriver.exe"))
+        browser.get(url)
+        return
     if (cmd == "browser"):
         tweet = int(input("ID:\>"))
         browser = webdriver.Chrome(executable_path = (os.getcwd() + "\chromedriver\chromedriver.exe"))
@@ -182,7 +185,7 @@ def tl(page):
 #        if (not timeline[id].entities["media"][0] == ""):
 #            print("(Has media)")
         print("\n ~~~~~~~~~~~~~~~~~~ \n")
-    print("End of page %i." %(page))
+    print("End of page %i." %int(page))
 
 if '__main__' == __name__:
     print("Logging in, please wait...")
