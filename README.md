@@ -29,6 +29,7 @@ reply, tweet ID, text - do i really need to explain this one too?
 
 help - prints out the readme.md file
 
+media, tweet ID(, media ID) - Opens attached media in the browser, currently only works with the first picture and thumbnails of videos
 
 
 
@@ -37,8 +38,6 @@ help - prints out the readme.md file
 ### commands:
 
 link, tweet ID, link ID - Opens a link from the selected tweet
-
-media, tweet ID, media ID, - Opens attached media in the browser
 
 
 ### Other:
