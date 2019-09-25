@@ -17,6 +17,8 @@ pagedn - Page down, loads the next 5 tweets (next page)
 
 pagedn - Page up, loads the previous 5 tweets (previous page)
 
+page, number - goes to page #number
+
 refresh - Refreshes the current page (good for staying up to date with the latest tweets)
 
 browser, tweet ID - Opens the selected tweet in the browser.
@@ -24,6 +26,10 @@ browser, tweet ID - Opens the selected tweet in the browser.
 tweet, text - it... well... tweets
 
 reply, tweet ID, text - do i really need to explain this one too?
+
+help - prints out the readme.md file
+
+
 
 
 ## I am currently working on:
