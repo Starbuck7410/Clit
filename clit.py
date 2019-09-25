@@ -3,6 +3,11 @@ import os
 import tweepy
 from selenium import webdriver
 
+#Globals:
+#pagenum, timeline, CONSUMER_TOKEN, CONSUMER_SECRET
+
+
+
 def get_api_keys():
     
     file = open("env.txt","r")
@@ -96,21 +101,22 @@ def log_in():
         print()
     return api
 
-def execute(cmd):
+def exe(cmd):
+    global pagenum
+
     if (cmd == "exit"):
         exit()
         
     if (cmd == "pagedn"):
         pagenum += 1
-        timeline(int(pagenum))
+        tl(int(pagenum))
         
     if (cmd == "pageup"):
         pagenum -= 1
-        timeline(int(pagenum))
+        tl(int(pagenum))
         
     if (cmd == "refresh"):
-        print(pagenum)
-        timeline(pagenum)
+        tl(pagenum)
     
 #    if (cmd == "link"):
 #        tweet = int(input())
@@ -132,7 +138,7 @@ def execute(cmd):
     
     return
 
-def timeline(page):
+def tl(page):
     global timeline
     timeline = api.home_timeline(count = 5, page = page)
     print("Loading page number %i..." %(page + 1))
@@ -148,14 +154,13 @@ def timeline(page):
 
 
 if '__main__' == __name__:
-    global pagenum
-    pagenum = 0
     print("Logging in, please wait...")
     get_api_keys()
     api = log_in()
-    timeline(0)
+    pagenum = 0
+    tl(pagenum)
     while (True):
-        command = input("clit>")
-        execute(command)
+        command = input("CLIT:\>")
+        exe(command)
     
     
