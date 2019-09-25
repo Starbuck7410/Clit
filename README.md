@@ -4,12 +4,12 @@ CLIT - Command Line Interface for Twitter
 Uses Python 3, Selenium with Chromedriver (For version 77), Google chrome, and tweepy.
 
 
-Commands:
+##Commands:
 
 Commands are the key to controlling Clit. Some commands require 1 input, which is the command name, and some require more than one (For example the "browser" command). Commands that require more than 1 input recieve the other inputs in a seperate line (So for the "browser" command, you enter "browser", [Enter], and the tweet ID).
 
 
-Current commands:
+###Current commands:
 
 exit - Exits Clit
 
@@ -26,16 +26,16 @@ tweet, text - it... well... tweets
 reply, tweet ID, text - do i really need to explain this one too?
 
 
-I am currently working on:
+## I am currently working on:
 
-commands:
+###commands:
 
 link, tweet ID, (link ID) - Opens a link from the selected tweet
 
 media, tweet ID, (media ID), - Opens attached media in the browser
 
 
-Other:
+###Other:
 
 Fixing broken commands and formatting
 
