@@ -131,17 +131,34 @@ def exe(cmd):
 #        browser = webdriver.Chrome(executable_path = (os.getcwd() + "\chromedriver\chromedriver.exe"))
 #        browser.get(url)
     if (cmd == "browser"):
-        tweet = int(input())
+        tweet = int(input("ID:\>"))
         browser = webdriver.Chrome(executable_path = (os.getcwd() + "\chromedriver\chromedriver.exe"))
         browser.get("https://twitter.com/" + timeline[tweet].user.screen_name + "/status/" + str(timeline[tweet].id))        
     
+    if (cmd == "tweet"):
+        text = input("TEXT:\>")
+        api.update_status(text)
+        print("You have succesfully tweeted!")
     
+    if (cmd == "reply"):
+        num = input("ID:\>")
+        text = input("TEXT:\>")
+        api.update_status(text, timeline[int(num)].id)
+        
+#    if (cmd == "id"):
+#        num = input()
+#        print(timeline[int(num)].id)
     return
 
 def tl(page):
     global timeline
-    timeline = api.home_timeline(count = 5, page = page)
-    print("Loading page number %i..." %(page + 1))
+    global pagesize
+    pagesize = 5
+    timeline = api.home_timeline(count = pagesize, page = page)
+    print("Loading page number %i..." %(page))
+    print()
+    print("~~~~~~~~~~~~~~~~~~")
+    print()
     for id in range(len(timeline)):
         print("Tweet ID: %i" %id)
         print(timeline[id].user.name + " (" + timeline[id].user.screen_name + ") tweeted:")
@@ -157,7 +174,7 @@ if '__main__' == __name__:
     print("Logging in, please wait...")
     get_api_keys()
     api = log_in()
-    pagenum = 0
+    pagenum = 1
     tl(pagenum)
     while (True):
         command = input("CLIT:\>")
