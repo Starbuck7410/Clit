@@ -77,13 +77,13 @@ def log_in():
         (token, secret) = tool.get_token_and_secret(verifier_code)
         if (token and secret):
             api = tool.verify_authorization()
-            print ('User @%s successfully authorized the app.' %api.me().screen_name)
+            print ('User @%s successfully logged in.' %api.me().screen_name)
 
         else:
             print ('Failed to get the key and secret for the user. Please run the program again to retry.')
             exit()
             
-        print("would you like to save the login credentials? (Y/N)")
+        print("Would you like to save the login credentials? (Y/N)")
         ans = input()
         if (ans == "Y"):
             file = open("authkey.txt","w+")
@@ -174,18 +174,14 @@ def tl(page):
     global pagesize
     pagesize = 5
     timeline = api.home_timeline(count = pagesize, page = page)
-    print()
-    print("~~~~~~~~~~~~~~~~~~")
-    print()
+    print("\n ~~~~~~~~~~~~~~~~~~ \n")
     for id in range(len(timeline)):
         print("Tweet ID: %i" %id)
         print(timeline[id].user.name + " (" + timeline[id].user.screen_name + ") tweeted:")
         print(timeline[id].text)
 #        if (not timeline[id].entities["media"][0] == ""):
 #            print("(Has media)")
-        print()
-        print("~~~~~~~~~~~~~~~~~~")
-        print()
+        print("\n ~~~~~~~~~~~~~~~~~~ \n")
     print("End of page %i." %(page))
 
 if '__main__' == __name__:
