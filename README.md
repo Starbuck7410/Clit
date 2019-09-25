@@ -19,7 +19,7 @@ pagedn - Page up, loads the previous 5 tweets (previous page)
 
 refresh - Refreshes the current page (good for staying up to date with the latest tweets)
 
-browser, (tweet ID) - Opens the selected tweet in the browser.
+browser, tweet ID - Opens the selected tweet in the browser.
 
 tweet, text - it... well... tweets
 
@@ -30,9 +30,9 @@ reply, tweet ID, text - do i really need to explain this one too?
 
 ### commands:
 
-link, tweet ID, (link ID) - Opens a link from the selected tweet
+link, tweet ID, link ID - Opens a link from the selected tweet
 
-media, tweet ID, (media ID), - Opens attached media in the browser
+media, tweet ID, media ID, - Opens attached media in the browser
 
 
 ### Other:

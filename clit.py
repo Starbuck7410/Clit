@@ -106,18 +106,26 @@ def exe(cmd):
 
     if (cmd == "exit"):
         exit()
+        return
         
     if (cmd == "pagedn"):
         pagenum += 1
         tl(int(pagenum))
-        
+        return
+    
     if (cmd == "pageup"):
         pagenum -= 1
         tl(int(pagenum))
-        
+        return
+    
     if (cmd == "refresh"):
         tl(pagenum)
+        return
     
+    if (cmd == "page"):
+        pagenum = input("PAGE:\>")
+        tl(pagenum)
+        return
 #    if (cmd == "link"):
 #        tweet = int(input())
 #        urlindex = int(input())
@@ -133,21 +141,32 @@ def exe(cmd):
     if (cmd == "browser"):
         tweet = int(input("ID:\>"))
         browser = webdriver.Chrome(executable_path = (os.getcwd() + "\chromedriver\chromedriver.exe"))
-        browser.get("https://twitter.com/" + timeline[tweet].user.screen_name + "/status/" + str(timeline[tweet].id))        
+        browser.get("https://twitter.com/" + timeline[tweet].user.screen_name + "/status/" + str(timeline[tweet].id))
+        return
     
     if (cmd == "tweet"):
         text = input("TEXT:\>")
         api.update_status(text)
         print("You have succesfully tweeted!")
+        return
     
     if (cmd == "reply"):
         num = input("ID:\>")
         text = input("TEXT:\>")
         api.update_status(text, timeline[int(num)].id)
+        return
+    
+    if (cmd == "help"):
+        file = open("readme.md","r")
+        help = file.read()
+        file.close()
+        print(help)
+        return
         
 #    if (cmd == "id"):
 #        num = input()
 #        print(timeline[int(num)].id)
+    print("Error: command \"%s\" was not found." %cmd)
     return
 
 def tl(page):
@@ -155,7 +174,6 @@ def tl(page):
     global pagesize
     pagesize = 5
     timeline = api.home_timeline(count = pagesize, page = page)
-    print("Loading page number %i..." %(page))
     print()
     print("~~~~~~~~~~~~~~~~~~")
     print()
@@ -168,7 +186,7 @@ def tl(page):
         print()
         print("~~~~~~~~~~~~~~~~~~")
         print()
-
+    print("End of page %i." %(page))
 
 if '__main__' == __name__:
     print("Logging in, please wait...")
