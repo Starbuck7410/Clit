@@ -2,6 +2,7 @@ import time
 import os
 import tweepy
 from selenium import webdriver
+import sys
 
 #Globals:
 #pagenum, timeline, CONSUMER_TOKEN, CONSUMER_SECRET
@@ -10,7 +11,7 @@ from selenium import webdriver
 
 def get_api_keys():
     
-    file = open("env.txt","r")
+    file = open(find_path("\env.txt"),"r")
     api_keys = file.read()
     file.close()
     
@@ -20,6 +21,15 @@ def get_api_keys():
     CONSUMER_TOKEN = api_keys[:25]
     CONSUMER_SECRET = api_keys[26:]
 
+def find_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.getcwd()
+
+    return (base_path + relative_path)
 
 class TwitterOAuthTool:
 
@@ -65,9 +75,12 @@ class TwitterOAuthTool:
 
 def log_in():
     tool = TwitterOAuthTool()
-    if (not os.path.exists("authkey.txt")):
+    if (not os.path.isdir(os.getenv('APPDATA') + "\CLIT")):
+        os.mkdir(os.getenv('APPDATA') + "\CLIT")
+    
+    if (not os.path.exists(os.getenv('APPDATA') + "\CLIT\\authkey.txt")):
         auth_url = tool.get_authorization_url()
-        browser = webdriver.Chrome(executable_path = (os.getcwd() + "\chromedriver\chromedriver.exe"))
+        browser = webdriver.Chrome(executable_path = (find_path("\chromedriver.exe")))
         browser.get(auth_url)
         while (browser.current_url[:36] != "https://github.com/Starbuck7410/Clit"):
             time.sleep(3)
@@ -86,11 +99,11 @@ def log_in():
         print("Would you like to save the login credentials? (Y/N)")
         ans = input()
         if (ans == "Y"):
-            file = open("authkey.txt","w+")
+            file = open(os.getenv('APPDATA') + "\CLIT\\authkey.txt","w+")
             file.write(token + "/" + secret)
             file.close()
     else:
-        file = open("authkey.txt","r")
+        file = open(os.getenv('APPDATA') + "\CLIT\\authkey.txt","r")
         keys = file.read()
         file.close()
         token = keys[:50]
@@ -138,12 +151,12 @@ def exe(cmd):
         if ('media' in timeline[tweet].entities):
             for image in timeline[tweet].entities['media']:
                 url = image['media_url']
-        browser = webdriver.Chrome(executable_path = (os.getcwd() + "\chromedriver\chromedriver.exe"))
+        browser = webdriver.Chrome(executable_path = (find_path("\chromedriver.exe")))
         browser.get(url)
         return
     if (cmd == "browser"):
         tweet = int(input("ID:\>"))
-        browser = webdriver.Chrome(executable_path = (os.getcwd() + "\chromedriver\chromedriver.exe"))
+        browser = webdriver.Chrome(executable_path = (find_path("\chromedriver.exe")))
         browser.get("https://twitter.com/" + timeline[tweet].user.screen_name + "/status/" + str(timeline[tweet].id))
         return
     
@@ -160,7 +173,7 @@ def exe(cmd):
         return
     
     if (cmd == "help"):
-        file = open("readme.md","r")
+        file = open(find_path("\readme.md"),"r")
         help = file.read()
         file.close()
         print(help)
