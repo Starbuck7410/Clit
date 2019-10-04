@@ -39,10 +39,13 @@ media, tweet ID(, media ID) - Opens attached media in the browser, currently onl
 
 link, tweet ID, link ID - Opens a link from the selected tweet
 
+logout - logs out so you can switch account
 
 ### Other:
 
 Fixing broken commands and formatting
+
+adding multiple accounts
 
 making sure the readme doesn't look like a 5 year old wrote it (will come near the end of the project though)
 
