@@ -5,7 +5,7 @@ from selenium import webdriver
 import sys
 
 #Globals:
-#pagenum, timeline, CONSUMER_TOKEN, CONSUMER_SECRET
+#pagenum, timeline, CONSUMER_TOKEN, CONSUMER_SECRET, config[]
 
 
 
@@ -114,6 +114,19 @@ def log_in():
         print()
     return api
 
+def loadconf():
+    global config
+    if (not os.path.exists(os.getenv('APPDATA') + "\CLIT\\config.txt")):
+        file = open(os.getenv('APPDATA') + "\CLIT\\config.txt","w+")            
+        file.write("5\n") #default settings
+        file.close()
+    file = open(os.getenv('APPDATA') + "\CLIT\\config.txt","r")
+    config = [line.rstrip('\n') for line in file]
+    file.close()
+    print(config)
+    
+    return
+
 def exe(cmd):
     global pagenum
 
@@ -188,7 +201,7 @@ def exe(cmd):
 def tl(page):
     global timeline
     global pagesize
-    pagesize = 5
+    pagesize = int(config[0])
     timeline = api.home_timeline(count = pagesize, page = page)
     print("\n ~~~~~~~~~~~~~~~~~~ \n")
     for id in range(len(timeline)):
@@ -204,6 +217,7 @@ if '__main__' == __name__:
     print("Logging in, please wait...")
     get_api_keys()
     api = log_in()
+    loadconf()
     pagenum = 1
     tl(pagenum)
     while (True):

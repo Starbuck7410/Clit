@@ -32,6 +32,9 @@ help - prints out the readme.md file
 media, tweet ID(, media ID) - Opens attached media in the browser, currently only works with the first picture and thumbnails of videos
 
 
+## Config structure:
+Line 0: Tweets per page. For some reason avy value over 10 will net you one tweet less. ¯\_(;_;)_/¯ 
+
 
 ## I am currently working on:
 
