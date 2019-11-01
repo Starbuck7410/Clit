@@ -33,7 +33,7 @@ media, tweet ID(, media ID) - Opens attached media in the browser, currently onl
 
 
 ## Config structure:
-Line 0: Tweets per page. For some reason any value over 10 will net you one tweet less. ¯\_(;_;)_/¯ 
+Line 0: Tweets per page. For some reason any value over 10 will net you one tweet less. ¯\\_(;\_;)_/¯ 
 
 
 ## I am currently working on:
